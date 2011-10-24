@@ -1,4 +1,8 @@
 Lolnas::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :users, ActiveAdmin::Devise.config
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
