@@ -14,6 +14,8 @@ gem 'activeadmin'
 
 gem 'sass-rails', "  ~> 3.1.0"
 
+gem 'acts_as_api'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
