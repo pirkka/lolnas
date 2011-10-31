@@ -7,3 +7,10 @@
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 
 User.create!(:email => "quentin@example.com", :password => "monkey")
+
+r = Restaurant.create!(:name => 'Raiku', :latitude => 60.180335531616585, :longitude => 24.951839447021484)
+h = Restaurant.create!(:name => 'Happiness', :latitude => 60.17176616743565, :longitude => 24.947290420532227)
+
+Lunch.create!(:restaurant_id => r.id, :title => 'Buffet: lihapullat, salaatti, parsakeitto', :price => 9.20)
+Lunch.create!(:restaurant_id => h.id, :title => 'Thai buffet (ilman sushia)', :price => 8.50)
+Lunch.create!(:restaurant_id => h.id, :title => 'Thai buffet (sushilla)', :price => 9)

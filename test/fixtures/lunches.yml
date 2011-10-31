@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: pizza
+  price: 8.50
+
+two:
+  title: buffet
+  price: 9.80
