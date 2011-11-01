@@ -27,4 +27,10 @@ class Api::LunchesController < Api::ApiController
     respond_with(@lunch, :api_template => :default, :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch))
   end
 
+  def destroy
+    @lunch = Lunch.find(params[:id])
+
+    respond_with(@lunch.destroy, :api_template => :default)
+  end
+
 end
