@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20111031142424) do
     t.string   "title"
     t.float    "price"
     t.integer  "restaurant_id"
+    t.date     "day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

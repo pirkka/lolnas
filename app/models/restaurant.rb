@@ -7,6 +7,7 @@ class Restaurant < ActiveRecord::Base
     template.add :name
     template.add :latitude
     template.add :longitude
+    template.add :lunches
   end
 
   validates :name, :presence => true, :uniqueness => true
