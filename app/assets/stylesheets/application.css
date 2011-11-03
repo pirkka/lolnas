@@ -5,3 +5,14 @@
  *= require_self
  *= require_tree . 
 */
+
+body {
+  text-align: center;
+}
+
+#container {
+  margin: 0 auto;
+  width: 800px;
+  text-align: left;
+}
+
