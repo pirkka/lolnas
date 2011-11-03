@@ -9,6 +9,8 @@ Lolnas::Application.routes.draw do
     end
   end
 
+  match '/lista' => 'restaurants#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
