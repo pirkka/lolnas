@@ -24,7 +24,7 @@
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26777335-1']);
-  _gaq.push(['_setDomainName', '<%= request.env['REMOTE_HOST'] %>']);
+  _gaq.push(['_setDomainName', '<%= request.env['SERVER_NAME'] %>']);
   _gaq.push(['_setAllowLinker', true]);
   _gaq.push(['_trackPageview']);
 
