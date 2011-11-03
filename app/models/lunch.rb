@@ -10,6 +10,8 @@ class Lunch < ActiveRecord::Base
 
   belongs_to :restaurant
 
-  scope :by_restaurant_id, lambda { |restaurant_id| where('(? IS NULL OR restaurant_id = ?)', restaurant_id, restaurant_id)}
+  def self.by_restaurant_id(restaurant_id)
+    where('(? IS NULL OR restaurant_id = ?)', restaurant_id, restaurant_id)
+  end
 
 end
