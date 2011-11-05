@@ -16,6 +16,8 @@ gem 'sass-rails', "  ~> 3.1.0"
 
 gem 'acts_as_api'
 
+gem 'jquery-rails'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -28,7 +30,12 @@ group :development do
   gem 'sqlite3'
 end
 
-gem 'jquery-rails'
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
