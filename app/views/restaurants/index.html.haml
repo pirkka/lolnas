@@ -2,7 +2,7 @@
 
 -@restaurants.each do |r|
   %h2= r.name
-  -r.lunches.each do |l|
+  -r.lunches.valid_only.each do |l|
     = l.title
     %strong= l.price
     %br/
