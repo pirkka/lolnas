@@ -7,7 +7,7 @@ class Restaurant < ActiveRecord::Base
     template.add :name
     template.add :latitude
     template.add :longitude
-    template.add :lunches
+    template.add :valid_lunches, :as => :lunches
   end
 
   validates :name, :presence => true, :uniqueness => true
@@ -15,5 +15,9 @@ class Restaurant < ActiveRecord::Base
   validates :latitude, :numericality => { :greater_than_or_equal_to => -90, :less_than_or_equal_to => 90 }
 
   has_many :lunches
+
+  def valid_lunches
+    lunches.valid_only
+  end
 
 end
