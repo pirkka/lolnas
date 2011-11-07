@@ -10,10 +10,16 @@ class Lunch < ActiveRecord::Base
 
   belongs_to :restaurant
 
-  scope :valid_only, where('(valid_from IS NULL AND valid_until IS NULL) OR (valid_from > ? AND valid_until < ?)', Time.now, Time.now)
+  scope :valid_only, where('(valid_from IS NULL AND valid_until IS NULL) OR (valid_from < ? AND valid_until > ?)', Time.now, Time.now)
 
   def self.by_restaurant_id(restaurant_id)
     where('(? IS NULL OR restaurant_id = ?)', restaurant_id, restaurant_id)
+  end
+
+  def valid_date=(valid_date)
+    parsed_date = Date.parse(valid_date)
+    self.valid_from = parsed_date.beginning_of_day
+    self.valid_until = parsed_date.end_of_day
   end
 
 end
