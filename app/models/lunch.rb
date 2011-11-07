@@ -6,6 +6,13 @@ class Lunch < ActiveRecord::Base
     template.add :id
     template.add :price
     template.add :title
+    template.add :valid_from
+    template.add :valid_until
+  end
+
+  api_accessible :without_valid_dates, :extend => :default do |template|
+    template.remove :valid_from
+    template.remove :valid_until
   end
 
   belongs_to :restaurant

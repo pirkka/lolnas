@@ -7,7 +7,11 @@ class Restaurant < ActiveRecord::Base
     template.add :name
     template.add :latitude
     template.add :longitude
-    template.add :valid_lunches, :as => :lunches
+    template.add :lunches
+  end
+
+  api_accessible :valid_lunches_only, :extend => :default do |template|
+    template.add :valid_lunches, :as => :lunches, :template => :without_valid_dates
   end
 
   validates :name, :presence => true, :uniqueness => true

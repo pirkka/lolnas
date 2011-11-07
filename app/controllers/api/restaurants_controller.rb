@@ -3,7 +3,7 @@ class Api::RestaurantsController < Api::ApiController
   def index
     @restaurants = Restaurant.all
 
-    respond_with(@restaurants, :api_template => :default)
+    respond_with(@restaurants, :api_template => :valid_lunches_only)
   end
 
   def show
