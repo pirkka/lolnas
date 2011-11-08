@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
 
   def index
-    @restaurants = Restaurant.find(:all)
+    @restaurants = Restaurant.all
   end
 end
