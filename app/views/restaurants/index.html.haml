@@ -1,7 +1,7 @@
 %h1 Lista
 
 -@restaurants.each do |r|
-  %h2= r.name
+  %h2= r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
   -r.valid_lunches.each do |l|
     = l.title
     %strong= l.price

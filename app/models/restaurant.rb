@@ -5,6 +5,7 @@ class Restaurant < ActiveRecord::Base
   api_accessible :default do |template|
     template.add :id
     template.add :name
+    template.add :url
     template.add :latitude
     template.add :longitude
     template.add :lunches
