@@ -5,21 +5,32 @@
 class GeoLocator
   constructor: (@lat, @lon) ->
   setCoordinates: (position) ->
-    lat = position.coords.latitude
-    lon = position.coords.longitude
-    console.log 'Setting location to ' + lat + ',' + lon
+    @lat = position.coords.latitude
+    @lon = position.coords.longitude
+    console.log 'Set location to ' + @lat + ',' + @lon
   locationFailed: ->
     alert 'Failed to geololcate (o __ o)¨'
   locate: (callback, callback_e) ->
     if window.navigator.geolocation
       console.log 'Locating'
-      window.navigator.geolocation.getCurrentPosition(this.setCoordinates, this.locationFailed);
+      window.navigator.geolocation.getCurrentPosition((position) => 
+        this.setCoordinates(position)
+      , this.locationFailed);
     else
       alert 'Geololcation is not supported. :/'
+  latitude: ->
+    return @lat
+  longitude: ->
+    return @lon
 
 class LunchSorter
-  sortLunches: (lat, lon) ->
-    console.log 'Sorting lunches'
+  constructor: (@locator) ->
+  sortByCloseness: ->
+    lat = @locator.latitude()
+    lon = @locator.longitude()
+    console.log 'Sorting lunches for ' + lat + ',' + lon
+    
+    return 'done'
 
-window.gl = new GeoLocator
-window.ls = new LunchSorter
+window.gl = new GeoLocator(0,0)
+window.ls = new LunchSorter(gl)
