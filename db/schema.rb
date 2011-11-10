@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20111108142931) do
     t.text     "title",         :limit => 255
     t.float    "price"
     t.integer  "restaurant_id"
-    t.date     "day"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "valid_from"
