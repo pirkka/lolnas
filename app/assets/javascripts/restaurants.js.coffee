@@ -3,15 +3,23 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 class GeoLocator
-  locateUser: (callback, callback_e) ->
+  constructor: (@lat, @lon) ->
+  setCoordinates: (position) ->
+    lat = position.coords.latitude
+    lon = position.coords.longitude
+    console.log 'Setting location to ' + lat + ',' + lon
+  locationFailed: ->
+    alert 'Failed to geololcate (o __ o)¨'
+  locate: (callback, callback_e) ->
     if window.navigator.geolocation
       console.log 'Locating'
-      window.navigator.geolocation.getCurrentPosition(callback, callback_e);
+      window.navigator.geolocation.getCurrentPosition(this.setCoordinates, this.locationFailed);
     else
       alert 'Geololcation is not supported. :/'
 
-class LunchLocator
-  
+class LunchSorter
+  sortLunches: (lat, lon) ->
+    console.log 'Sorting lunches'
 
 window.gl = new GeoLocator
-window.ll = new LunchLocator
+window.ls = new LunchSorter
