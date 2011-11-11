@@ -1,9 +1,10 @@
-%div#controls
+#controls
   %a{:href => 'javascript: gl.locate();', :class => 'button'} Locate
 
-%div#map
+#map
+  #map_canvas
 
-%div#list
+#list
   -@restaurants.each do |r|
     %h2= r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
     -r.valid_lunches.each do |l|

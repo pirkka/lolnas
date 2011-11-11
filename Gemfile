@@ -30,6 +30,7 @@ end
 group :development do
   gem 'heroku'
   gem 'sqlite3'
+  gem 'rails-dev-tweaks', '~> 0.5.1'
 end
 
 group :development, :test do
