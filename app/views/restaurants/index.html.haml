@@ -10,7 +10,7 @@
     %div{:class => 'menu'}
       -r.valid_lunches.each do |l|
         = l.title
-        %strong= l.price
+        %strong= format_price(l.price)
         %br/
 
 :javascript
