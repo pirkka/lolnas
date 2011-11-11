@@ -8,7 +8,8 @@
 
 body {
   text-align: center;
-  font-size: 16px;
+  font-size: 28px;
+  font-family: 'Mate', serif;
 }
 
 #container {
@@ -17,6 +18,13 @@ body {
   text-align: left;
 }
 
-h2 {
-  font-size: 16px;
+
+div.restaurant {
+  padding: 8px;
+  background: #ccc;
+}
+
+div.menu {
+  padding: 8px;
+  background: #eee;
 }
