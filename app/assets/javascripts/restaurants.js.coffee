@@ -54,6 +54,14 @@ class LunchMap
       radius: 40
     youAreHere = new google.maps.Circle(populationOptions)
 
-window.gl = new GeoLocator(0,0)
-window.ls = new LunchSorter(gl)
-window.lm = new LunchMap(gl)
+class LunchMapGUI
+  constructor: (lat, lon) ->
+    @gl = new GeoLocator(lat, lon)
+    @ls = new LunchSorter(@gl)
+    @lm = new LunchMap(@gl)
+    @lm.create()
+  locate: ->
+    @gl.locate()
+    @lm.create()
+
+window.LunchMapGUI = LunchMapGUI

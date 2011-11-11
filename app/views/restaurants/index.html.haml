@@ -1,5 +1,5 @@
 #controls
-  %a{:href => 'javascript: gl.locate();', :class => 'button'} Locate
+  %a{:href => 'javascript: window.lmgui.locate();', :class => 'button'} Locate
 
 #map
   #map_canvas
@@ -11,3 +11,8 @@
       = l.title
       %strong= l.price
       %br/
+
+:javascript
+  $(function () {
+    window.lmgui = new LunchMapGUI(#{@latitude},#{@longitude})
+  });
