@@ -9,6 +9,7 @@ class Restaurant < ActiveRecord::Base
     template.add :latitude
     template.add :longitude
     template.add :lunches
+    template.add :distance # NB
   end
 
   api_accessible :valid_lunches_only, :extend => :default do |template|
@@ -23,6 +24,30 @@ class Restaurant < ActiveRecord::Base
 
   def valid_lunches
     lunches.valid_only
+  end
+  
+  def distance=(value)
+    @distance = value
+  end
+
+  def distance
+    @distance
+  end
+  
+  # as long as our db doesn't support this...
+  def self.sort_by_distance(restaurants, lat, lon)
+    Rails.logger.debug("sorting for #{lat}, #{lon}")
+    restaurants.each do |r|
+      r.distance = Restaurant.distance_formula(r.latitude, lat, r.longitude, lon)
+      Rails.logger.debug("#{r.name} at #{r.latitude}, #{r.longitude} ---> #{r.distance}")
+    end
+    restaurants.sort { |a,b| a.distance <=> b.distance }
+  end
+
+  # upgrade when needed to true lat lon formula
+  def self.distance_formula (x1, x2, y1, y2) # define method distance formula with parameters x1, x2, y1, y2
+    d = Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2)) # distance = square root of x2-x1^2 + y2-y1^2
+    return d # return d, the distance
   end
 
 end
