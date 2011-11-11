@@ -32,5 +32,28 @@ class LunchSorter
     
     return 'done'
 
+class LunchMap
+  constructor: (@locator) ->
+  create: ->
+    console.log google.maps
+    console.log google.maps.LatLng
+    latlng = new google.maps.LatLng(@locator.latitude(), @locator.longitude())
+    myOptions = 
+      zoom: 16,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    map = new google.maps.Map(window.document.getElementById("map_canvas"), myOptions)
+    populationOptions =
+      strokeColor: "#FF0000",
+      strokeOpacity: 0,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35,
+      map: map,
+      center: latlng,
+      radius: 40
+    youAreHere = new google.maps.Circle(populationOptions)
+
 window.gl = new GeoLocator(0,0)
 window.ls = new LunchSorter(gl)
+window.lm = new LunchMap(gl)

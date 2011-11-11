@@ -1,5 +1,10 @@
 == Lolnas API project
 
+== Development
+
+Rails Dev Tweaks is installed to significantly boost performance in development
+https://github.com/wavii/rails-dev-tweaks
+
 == Resources
 
 Street addresses to lat/lon coordinates

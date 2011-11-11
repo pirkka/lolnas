@@ -4,6 +4,7 @@
 
 div#controls {
   height: 40px;
+  margin-bottom: 15px;
 }
 
 div#controls a {
@@ -15,11 +16,16 @@ div#map {
   height: 200px;
   width: 800px;
   background: #fca;
+  margin-bottom: 15px;
 }
 
 div#list {
   text-align: left;
   background: #8Cf;
+}
+
+#map_canvas { 
+  height: 100% 
 }
 
 .button {
