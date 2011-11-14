@@ -21,7 +21,14 @@ div#map {
 
 div#list {
   text-align: left;
-  background: #8Cf;
+}
+
+div.restaurant {
+  font-weight: bold;
+}
+
+div.menu {
+ margin-bottom: 20px;
 }
 
 #map_canvas { 

@@ -5,13 +5,8 @@ class Api::RestaurantsController < Api::ApiController
     @latitude = 60.172389
     @longitude = 24.947516
     
-    if params[:latitude]
-      @latitude = params[:latitude]
-    end
-
-    if params[:longitude]
-      @longitude = params[:longitude]
-    end
+    @latitude = params[:latitude] if params[:latitude]
+    @longitude = params[:longitude] if params[:longitude]
     
     # sort by distance
     @restaurants = Restaurant.all
