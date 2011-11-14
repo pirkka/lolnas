@@ -1,8 +1,13 @@
-#controls
-  %a{:href => 'javascript: window.lmgui.locate();', :class => 'button'} Locate
 
-#map
-  #map_canvas
+/#map
+/  #map_canvas
+
+#address
+  %span#address
+  %a{:class => 'button', :id => 'locate'} Paikanna
+
+#controls
+  
 
 #list
   -@restaurants.each do |r|

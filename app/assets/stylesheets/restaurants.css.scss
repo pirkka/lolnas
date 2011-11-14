@@ -12,6 +12,10 @@ div#controls a {
   text-decoration: none;
 }
 
+a#locate {
+  margin-left: 10px;
+}
+
 div#map {
   height: 200px;
   width: 800px;
@@ -48,9 +52,7 @@ div.menu {
 	border-radius:6px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
-	color:#777777;
-	font-family:arial;
-	font-size:15px;
+	color:#666;
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
