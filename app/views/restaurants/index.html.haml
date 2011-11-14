@@ -21,4 +21,7 @@
 :javascript
   $(function () {
     window.lmgui = new LunchMapGUI(#{@latitude},#{@longitude})
+    $('a#locate').click(function () {
+      window.lmgui.locate();
+    })
   });

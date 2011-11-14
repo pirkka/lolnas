@@ -39,9 +39,9 @@ class LunchSorter
   htmlLunch: (l) ->
     html = ''
     html += l.title
-    html += '&nbsp;'
+    html += '&nbsp;<strong>'
     html += l.price
-    html += '&nbsp;&euro;'
+    html += '&nbsp;&euro;</strong>'
     html += '<br />'
     return html
   sortByCloseness: ->
