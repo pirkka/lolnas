@@ -5,7 +5,9 @@ class RestaurantsController < ApplicationController
     @latitude = 60.172389
     @longitude = 24.947516
 
-    @latitude = params[:latitude].to_f if params[:latitude]
+    if params[:latitude]
+      @latitude = params[:latitude].to_f 
+    end
     @longitude = params[:longitude].to_f if params[:longitude]
 
     # sort by distance

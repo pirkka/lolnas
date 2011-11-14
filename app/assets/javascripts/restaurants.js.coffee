@@ -25,11 +25,41 @@ class GeoLocator
 
 class LunchSorter
   constructor: (@locator) ->
+  htmlRestaurant: (r) ->
+    html = ''
+    html += '<div class="restaurant">'
+    html += '<a href="' + r.url + '">'
+    html += r.name
+    html += '</a>'
+    html += '</div>'
+    html += '<div class="menu">'
+    html += this.htmlLunch(l) for l in r.lunches
+    html += '</div>'
+    return html
+  htmlLunch: (l) ->
+    html = ''
+    html += l.title
+    html += '&nbsp;'
+    html += l.price
+    html += '&nbsp;&euro;'
+    html += '<br />'
+    return html
   sortByCloseness: ->
     lat = @locator.latitude()
     lon = @locator.longitude()
     console.log 'Sorting lunches for ' + lat + ',' + lon
-    
+    # ajax from server
+    ajax_settings =
+      context: this
+      success: (data) =>
+        # empty list
+        $('#list').html('')
+        # update html list
+        $('#list').append(this.htmlRestaurant(d)) for d in data.restaurants
+        
+      url: '/api/restaurants.json?latitude=' + lat + '&longitude=' + lon
+    $.ajax(ajax_settings)
+
     return 'done'
 
 class LunchMap
@@ -60,17 +90,15 @@ class LunchAddress
     latlng = new google.maps.LatLng(@locator.latitude(), @locator.longitude());
     @geocoder.geocode({'latLng': latlng}, (results, status) =>
       if status == google.maps.GeocoderStatus.OK
-        console.log 'geocoder success'
         if results[0]
           txt = 'Lounaslista osoitteelle ' + this.formatAddress(results[0])
           this.writeAddress(txt)
         else
-          console.log "No results found"
           txt = 'Lounaslista sijainnille ' + @locator.latitude() + ',' + @locator.longitude()
           this.writeAddress(txt)
       else
         console.log "Geocoder failed due to: " + status
-        txt = 'Lounaslista osoitteelle Vuorikatu 15, Helsinki'
+        txt = 'Geokoodaus epäonnistui.'
         this.writeAddress(txt)
     )
   writeAddress: (txt) ->
@@ -85,9 +113,11 @@ class LunchMapGUI
     #@lm = new LunchMap(@gl)
     @la = new LunchAddress(@gl)
     #@lm.create()
+    @ls.sortByCloseness()
     @la.display()
   locate: ->
     @gl.locate()
+    @ls.sortByCloseness()
     #@lm.create() # creates map
     @la.display()
 

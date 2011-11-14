@@ -38,7 +38,7 @@ class Restaurant < ActiveRecord::Base
   def self.sort_by_distance(restaurants, lat, lon)
     Rails.logger.debug("sorting for #{lat}, #{lon}")
     restaurants.each do |r|
-      r.distance = Restaurant.distance_formula(r.latitude, lat, r.longitude, lon)
+      r.distance = Restaurant.distance_formula(r.latitude.to_f, lat.to_f, r.longitude.to_f, lon.to_f)
       Rails.logger.debug("#{r.name} at #{r.latitude}, #{r.longitude} ---> #{r.distance}")
     end
     restaurants.sort { |a,b| a.distance <=> b.distance }
