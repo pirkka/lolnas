@@ -89,6 +89,7 @@ GEM
       rubyzip
       term-ansicolor (~> 1.0.5)
     hike (1.2.1)
+    hpricot (0.8.4)
     i18n (0.6.0)
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
@@ -164,6 +165,8 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.7.0)
+    ruby_parser (2.3.1)
+      sexp_processor (~> 3.0)
     rubyzip (0.9.4)
     sass (3.1.10)
     sass-rails (3.1.4)
@@ -177,6 +180,7 @@ GEM
       ffi (= 1.0.9)
       json_pure
       rubyzip
+    sexp_processor (3.0.7)
     sprockets (2.0.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -209,6 +213,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   heroku
+  hpricot
   jquery-rails
   json
   pg
@@ -216,6 +221,7 @@ DEPENDENCIES
   rails-dev-tweaks (~> 0.5.1)
   rspec
   rspec-rails
+  ruby_parser
   sass-rails (~> 3.1.0)
   sqlite3
   uglifier

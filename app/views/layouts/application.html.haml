@@ -14,6 +14,9 @@
       #logo
         =image_tag "/assets/lolnas.svg"
 
+      #flash_messages
+        = flash[:notice] if flash[:notice]
+
       = yield
 
     -if Rails.env.production?

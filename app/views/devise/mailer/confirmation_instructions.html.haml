@@ -1,0 +1,10 @@
+%p
+  Tervetuloa #{@resource.email}!
+%p Aktivoi Lolnas-tunnuksesi seuraavasta linkistä:
+%p
+  = link_to 'Aktivoi tunnus', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+  = "(#{confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)})"
+
+%p APIn käyttöön vaadittu API-avaimesi on #{@resource.authentication_token} (toimii tunnuksen aktivoinnin jälkeen).
+
+%p Terveisin Lolnas-ylläpito admin@lolnas.fi

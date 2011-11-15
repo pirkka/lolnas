@@ -31,6 +31,8 @@ group :development do
   gem 'heroku'
   gem 'sqlite3'
   gem 'rails-dev-tweaks', '~> 0.5.1'
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 
 group :development, :test do
