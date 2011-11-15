@@ -8,14 +8,21 @@
 
 body {
   text-align: center;
-  font-size: 28px;
+  font-size: 22px;
   font-family: 'Mate', serif;
 }
 
 #container {
   margin: 0 auto;
-  width: 800px;
+  width: 600px;
   text-align: left;
 }
 
 
+#logo {
+  width: 100%;
+}
+
+#logo img {
+  width: 100%;
+}
