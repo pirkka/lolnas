@@ -1,7 +1,7 @@
 Lolnas::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :api_users, :class_name => 'Api::User', :controllers => {:confirmations => "confirmations"} do
     put "confirm_account", :to => "confirmations#confirm_account"
