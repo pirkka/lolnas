@@ -10,6 +10,7 @@ class Api::ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   before_filter :authenticate_api_user!, :except => [:index, :show]
+  after_filter :sign_out_api_user!, :except => [:index, :show]
 
   self.responder = ActsAsApi::Responder
   respond_to :json, :xml
@@ -30,6 +31,12 @@ class Api::ApiController < ApplicationController
 
   def current_ability
     @current_ability ||= Ability.new(current_api_user)
+  end
+
+  private
+
+  def sign_out_api_user!
+    sign_out(:api_user)
   end
 
 end
