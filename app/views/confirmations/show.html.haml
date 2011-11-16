@@ -1,8 +1,10 @@
 = form_for(resource, :url => confirm_account_path) do |f|
   = devise_error_messages!
   %p
-    = f.label :email
-    = @api_user.email
+    Olet aktivoimassa API-tunnusta osoitteelle #{@api_user.email}. Aktivoinnin
+    jälkeen API-rajapinta on käytössä aktivointisähköpostin yhteydessä lähetetyllä
+    API-avaimella.
+
     = f.hidden_field :confirmation_token
   %p.clearfix
     = f.submit 'Aktivoi tunnus'
