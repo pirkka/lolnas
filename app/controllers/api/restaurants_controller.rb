@@ -1,4 +1,4 @@
-class Api::RestaurantsController < Api::ApiController
+class Api::RestaurantsController < ApiController
   load_and_authorize_resource
 
   def index

@@ -1,4 +1,4 @@
-class Api::ApiController < ApplicationController
+class ApiController < ApplicationController
 
   class ParameterMissingError < ActionController::ActionControllerError;end;
 
@@ -14,6 +14,9 @@ class Api::ApiController < ApplicationController
 
   self.responder = ActsAsApi::Responder
   respond_to :json, :xml
+
+  def index
+  end
 
   protected
 

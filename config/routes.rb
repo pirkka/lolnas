@@ -8,6 +8,7 @@ Lolnas::Application.routes.draw do
   end
 
   namespace :api do
+    get '/' => 'api#index'
     resources :restaurants do
       resources :lunches
     end

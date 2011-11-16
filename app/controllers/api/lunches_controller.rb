@@ -1,4 +1,4 @@
-class Api::LunchesController < Api::ApiController
+class Api::LunchesController < ApiController
   before_filter :load_by_restaurant, :only => [:show, :update, :destroy]
   before_filter :create_by_restaurant, :only => [:create]
   load_and_authorize_resource

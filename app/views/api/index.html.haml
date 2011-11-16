@@ -1,0 +1,151 @@
+%h1 APIn käyttö
+
+%p
+  Rajapinnat tukevat sekä JSON- että XML-formaattia. Rajapinnan kautta on mahdollista lukea ravintoloiden ja lounaiden
+  tietoja, oman ravintolan luomiseen tarvitset API-avaimen.
+
+%p
+  Content-typen täytyy olla application/json tai application/xml.
+
+%h2 API-avaimen hankkiminen
+
+%ul
+  %li Luo itsellesi API-avain osoitteessa #{link_to root_url(:only_path => false)+"api_users/sign_up", "/api_users/sign_up"}
+  %li Saat sähköpostilla ohjeet tunnuksen avaimen aktivointiin ja API-avaimen
+  %li Aktivoi tunnus sähköpostin ohjeiden mukaan
+
+%h2 Tietomalli
+
+%h3 Restaurant
+%table
+  %tr
+    %th
+      Kentän nimi
+    %th
+      Tyyppi
+    %th
+      Pakollinen?
+  %tr
+    %td
+      name
+    %td
+      String
+    %td
+      X
+  %tr
+    %td
+      latitude
+    %td
+      Float
+    %td
+      X
+  %tr
+    %td
+      longitude
+    %td
+      Float
+    %td
+      X
+  %tr
+    %td
+      url
+    %td
+      String
+    %td
+
+%h3 Lunch
+%table
+  %tr
+    %th
+      Kentän nimi
+    %th
+      Tyyppi
+    %th
+      Pakollinen?
+    %th
+      Lisätietoja
+  %tr
+    %td
+      title
+    %td
+      Text
+    %td
+      X
+  %tr
+    %td
+      price
+    %td
+      Float
+    %td
+  %tr
+    %td
+      valid_from
+    %td
+      Date
+    %td
+    %td
+      Määrittelee mistä lähtien lounas on voimassa
+  %tr
+    %td
+      valid_until
+    %td
+      Date
+    %td
+    %td
+      Määrittelee mihin asti lounas on voimassa
+  %tr
+    %td
+      valid_date
+    %td
+      String (esim. pp.kk.vvvv)
+    %td
+    %td
+      Määrittelee päivän, jolloin lounas on voimassa. Jos nil, niin ko. lounas on aina voimassa.
+      Voidaan käyttää POST/PUT-operaatioissa valid_from/valid_until sijaan.
+
+%h2 Avoimet rajapinnat
+
+%ul
+  %li http://www.lolnas.fi/api/restaurants.(json/xml)
+  %ul
+    %li Listaa kaikki ravintolat ja niiden voimassaolevat lounaat
+  %li http://www.lolnas.fi/api/restaurants/id.(json/xml)
+  %ul
+    %li Listaa ravintolan id tiedot ja kaikki lounaat
+  %li http://www.lolnas.fi/api/restaurants/id/lunches.(json/xml)
+  %ul
+    %li Listaa ravintolan id kaikki lounaat
+  %li http://www.lolnas.fi/api/restaurants/id/lunches/id.(json/xml)
+  %ul
+    %li Listaa lounaan id tiedot
+
+%h2 API-avaimen vaatimat rajapinnat
+
+%ul
+  %li POST http://www.lolnas.fi/api/restaurants.(json/xml)?auth_token=API_AVAIN
+  %ul
+    %li Luo uuden ravintolan
+    %pre { "restaurant" : { "name":"Happiness", "latitude":60.17176616743565, "longitude":24.947290420532227 } }
+
+%ul
+  %li PUT http://www.lolnas.fi/api/restaurants/id.(json/xml)?auth_token=API_AVAIN
+  %ul
+    %li Muokkaa ravintolan id tietoja
+    %pre { "restaurant" : { "name":"Happiness Thai Buffet" } }
+
+%ul
+  %li POST http://www.lolnas.fi/api/restaurants/id/lunches.(json/xml)?auth_token=API_AVAIN
+  %ul
+    %li Luo ravintolaan id uuden lounaan
+    %pre { "lunch" : { "title":"Thai-buffet", "price":8.5 } }
+
+%ul
+  %li PUT http://www.lolnas.fi/api/restaurants/id/lunches/lunch_id.(json/xml)?auth_token=API_AVAIN
+  %ul
+    %li Muokkaa ravintolan id lounasta lunch_id
+    %pre { "lunch" : { "title":"Thai-buffet sushilla", "price":9.5 } }
+
+%ul
+  %li DESTROY http://www.lolnas.fi/api/restaurants/id/lunches/lunch_id.(json/xml)?auth_token=API_AVAIN
+  %ul
+    %li Poista ravintolan id lounas lunch_id
