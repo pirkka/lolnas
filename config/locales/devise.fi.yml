@@ -51,7 +51,7 @@ fi:
       failure: 'Could not authorize you from %{kind} because "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Confirmation instructions'
+        subject: 'Lolnas API-tunnuksen aktivointi'
       reset_password_instructions:
         subject: 'Reset password instructions'
       unlock_instructions:
