@@ -14,7 +14,7 @@ class Api::User < ActiveRecord::Base
 
   attr_accessor :password
 
-  has_many :restaurants
+  has_many :restaurants, :foreign_key => "api_user_id"
 
   protected
 

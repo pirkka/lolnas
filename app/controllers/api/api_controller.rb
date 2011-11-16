@@ -9,6 +9,8 @@ class Api::ApiController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  before_filter :authenticate_api_user!, :except => [:index, :show]
+
   self.responder = ActsAsApi::Responder
   respond_to :json, :xml
 
@@ -26,5 +28,8 @@ class Api::ApiController < ApplicationController
     render :text => exception.message, :status => 400
   end
 
+  def current_ability
+    @current_ability ||= Ability.new(current_api_user)
+  end
 
 end

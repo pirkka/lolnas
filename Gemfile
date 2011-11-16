@@ -11,6 +11,7 @@ gem 'pg'
 
 gem 'devise'
 gem 'activeadmin'
+gem 'cancan'
 
 gem 'sass-rails', "  ~> 3.1.0"
 

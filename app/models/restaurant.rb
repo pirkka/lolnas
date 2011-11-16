@@ -22,7 +22,9 @@ class Restaurant < ActiveRecord::Base
 
   has_many :lunches
 
-  belongs_to :user, :class_name => "Api::User"
+  belongs_to :api_user, :class_name => "Api::User"
+
+  attr_accessible :name, :url, :latitude, :longitude, :distance
 
   def valid_lunches
     lunches.valid_only
