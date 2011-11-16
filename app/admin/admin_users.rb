@@ -11,4 +11,13 @@ ActiveAdmin.register AdminUser do
     default_actions
   end
 
+  filter :email
+
+  form do |f|
+    f.inputs "Details" do
+      f.input :email
+      f.input :password
+    end
+    f.buttons
+  end
 end
