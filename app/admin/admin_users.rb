@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  controller.authorize_resource
 
   index do
     column :email

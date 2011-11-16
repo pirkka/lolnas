@@ -101,3 +101,11 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
 end
+
+module ActiveAdmin
+  class ResourceController
+    def current_ability # override default call of current_user with supergyver-specific current_user_method
+      @current_ability ||= Ability.new(send(ActiveAdmin.application.current_user_method))
+    end
+  end
+end
