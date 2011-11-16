@@ -4,7 +4,7 @@ class Api::LunchesController < Api::ApiController
   load_and_authorize_resource
 
   def index
-    @lunches = Lunch.by_restaurant_id(params[:restaurant_id]).all
+    @lunches = @lunches.by_restaurant_id(params[:restaurant_id])
 
     respond_with(@lunches, :api_template => :default)
   end
@@ -14,7 +14,6 @@ class Api::LunchesController < Api::ApiController
   end
 
   def create
-#    @lunch.restaurant_id = params[:restaurant_id]
     @lunch.save!
 
     respond_with(@lunch, :api_template => :default, :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch))
