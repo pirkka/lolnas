@@ -16,6 +16,7 @@ class ApiController < ApplicationController
   respond_to :json, :xml
 
   def index
+    respond_to :html
   end
 
   protected
