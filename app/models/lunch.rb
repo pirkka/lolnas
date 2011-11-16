@@ -20,6 +20,10 @@ class Lunch < ActiveRecord::Base
   scope :valid_only, lambda { where('(valid_from IS NULL AND valid_until IS NULL) OR (valid_from < ? AND valid_until > ?)', Time.now, Time.now) }
   scope :by_restaurant_id, lambda { |restaurant_id| where('(? IS NULL OR restaurant_id = ?)', restaurant_id, restaurant_id) }
 
+  validates :title, :presence => true
+
+  attr_accessible :title, :price, :valid_from, :valid_until, :valid_date
+
   def valid_date=(valid_date)
     parsed_date = Date.parse(valid_date)
     self.valid_from = parsed_date.beginning_of_day
