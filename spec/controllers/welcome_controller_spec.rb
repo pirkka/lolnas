@@ -7,7 +7,7 @@ describe WelcomeController do
     it "shows logo" do
       get "index"
 
-      response.body.should include("logo_lolnas.gif")
+      response.body.should include("lolnas.svg")
     end
   end
 
