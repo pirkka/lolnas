@@ -2,16 +2,10 @@ class RestaurantsController < ApplicationController
 
   def index
     # defaults
-    @latitude = 60.172389
-    @longitude = 24.947516
-
-    if params[:latitude]
-      @latitude = params[:latitude].to_f 
-    end
-    @longitude = params[:longitude].to_f if params[:longitude]
+    latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
+    longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
 
     # sort by distance
-    @restaurants = Restaurant.all
-    @restaurants = Restaurant.sort_by_distance(@restaurants, @latitude, @longitude)
+    @restaurants = Restaurant.sort_by_distance(Restaurant.all, latitude, longitude)
   end
 end
