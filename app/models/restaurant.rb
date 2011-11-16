@@ -22,10 +22,12 @@ class Restaurant < ActiveRecord::Base
 
   has_many :lunches
 
+  belongs_to :user, :class_name => "Api::User"
+
   def valid_lunches
     lunches.valid_only
   end
-  
+
   def distance=(value)
     @distance = value
   end
@@ -33,7 +35,7 @@ class Restaurant < ActiveRecord::Base
   def distance
     @distance
   end
-  
+
   # as long as our db doesn't support this...
   def self.sort_by_distance(restaurants, lat, lon)
     Rails.logger.debug("sorting for #{lat}, #{lon}")

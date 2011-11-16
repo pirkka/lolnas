@@ -14,6 +14,8 @@ class Api::User < ActiveRecord::Base
 
   attr_accessor :password
 
+  has_many :restaurants
+
   protected
 
   def password_required?
