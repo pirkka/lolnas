@@ -16,8 +16,9 @@
         %a{:href => '/'}
           =image_tag "/assets/lolnas.svg"
 
-      #flash_messages
-        = flash[:notice] if flash[:notice]
+      -if flash[:notice]
+        #flash_messages
+          = flash[:notice] if flash[:notice]
 
       = yield
 

@@ -33,3 +33,9 @@ div.maplink {
 th {
   padding-right: 20px;
 }
+
+div#flash_messages {
+  padding: 20px;
+  background: #FFFF66;
+  margin-bottom: 20px;
+}
