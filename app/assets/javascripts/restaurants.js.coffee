@@ -28,7 +28,7 @@ class LunchSorter
   htmlRestaurant: (r) ->
     html = ''
     html += '<div class="maplink">'
-    html += '<a href="http://maps.google.com/maps?q=' + r.name + '@' + r.latitude + ',' + r.longitude + '&z=16">kartalla</a>'
+    html += '<a href="http://maps.google.com/maps?q=' + r.latitude + ',' + r.longitude + '+(' + r.name + ')&z=16">kartalla</a>'
     html += '</div>'
     html += '<div class="restaurant">'
     html += '<a href="' + r.url + '">'

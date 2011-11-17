@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(:version => 20111116162159) do
 
   create_table "restaurants", :force => true do |t|
     t.string   "name"
-    t.decimal  "latitude",   :precision => 15, :scale => 12
-    t.decimal  "longitude",  :precision => 15, :scale => 12
+    t.decimal  "latitude"
+    t.decimal  "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
