@@ -37,10 +37,17 @@ div.menu {
 
 #address {
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 #map_canvas { 
   height: 100% 
+}
+
+#locate {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 46px;
 }
 
 .button {
