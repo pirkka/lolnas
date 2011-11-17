@@ -11,6 +11,7 @@ gem 'pg'
 
 gem 'devise'
 gem 'activeadmin'
+gem 'cancan'
 
 gem 'sass-rails', "  ~> 3.1.0"
 
@@ -31,6 +32,8 @@ group :development do
   gem 'heroku'
   gem 'sqlite3'
   gem 'rails-dev-tweaks', '~> 0.5.1'
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 
 group :development, :test do

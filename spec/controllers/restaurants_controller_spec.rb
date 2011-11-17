@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe RestaurantsController do
@@ -17,13 +18,13 @@ describe RestaurantsController do
     it "shows Raiku" do
       get "index"
 
-      response.body.should include("<h2>Raiku</h2>")
+      response.body.should include("<div class='restaurant'>Raiku</div>")
     end
 
     it "show Happiness' thai-buffet" do
       get "index"
 
-      response.body.should include("<h2>Happiness</h2>\nThai-buffet\n<strong>8.5</strong>")
+      response.body.should include("<div class='restaurant'>Happiness</div>\n<div class='menu'>\nThai-buffet\n<strong>8,50 €</strong>")
     end
 
   end

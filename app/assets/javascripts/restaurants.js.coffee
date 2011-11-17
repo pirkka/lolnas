@@ -9,11 +9,11 @@ class GeoLocator
     @lon = position.coords.longitude
     console.log 'Set location to ' + @lat + ',' + @lon
   locationFailed: ->
-    alert 'Failed to geololcate (o __ o)¨'
+    alert 'Failed to geololcate (o __ o)'
   locate: (callback, callback_e) ->
     if window.navigator.geolocation
       console.log 'Locating'
-      window.navigator.geolocation.getCurrentPosition((position) => 
+      window.navigator.geolocation.getCurrentPosition((position) =>
         this.setCoordinates(position)
       , this.locationFailed);
     else
@@ -59,7 +59,7 @@ class LunchSorter
         $('#list').html('')
         # update html list
         $('#list').append(this.htmlRestaurant(d)) for d in data.restaurants
-        
+
       url: '/api/restaurants.json?latitude=' + lat + '&longitude=' + lon
     $.ajax(ajax_settings)
 
@@ -69,7 +69,7 @@ class LunchMap
   constructor: (@locator) ->
   create: ->
     latlng = new google.maps.LatLng(@locator.latitude(), @locator.longitude())
-    myOptions = 
+    myOptions =
       zoom: 16,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -101,7 +101,7 @@ class LunchAddress
           this.writeAddress(txt)
       else
         console.log "Geocoder failed due to: " + status
-        txt = 'Geokoodaus epäonnistui.'
+        txt = 'Geokoodaus ep&auml;onnistui.'
         this.writeAddress(txt)
     )
   writeAddress: (txt) ->

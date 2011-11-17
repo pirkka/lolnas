@@ -1,0 +1,12 @@
+%p
+  Hei #{@resource.email}!
+%p Kiitos mielenkiinnostasi Lolnasta kohtaan. API on käytettävissä, kun olet aktivoinut avaimesi.
+%p
+  Aktivoi API-seuraavasta linkistä:
+  = link_to confirmation_url(@resource, :confirmation_token => @resource.confirmation_token), confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+
+%p APIn käyttöön vaadittu API-avaimesi on #{@resource.authentication_token} (toimii aktivoinnin jälkeen).
+
+%p Lisätietoa APIn käytöstä löydät osoitteesta #{link_to "http://www.lolnas.fi/api", "http://www.lolnas.fi/api"}
+
+%p Terveisin Lolnas-ylläpito, admin@lolnas.fi

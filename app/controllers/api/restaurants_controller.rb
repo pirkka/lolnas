@@ -1,34 +1,28 @@
-class Api::RestaurantsController < Api::ApiController
+class Api::RestaurantsController < ApiController
+  load_and_authorize_resource
 
   def index
     # defaults
-    @latitude = 60.172389
-    @longitude = 24.947516
-    
-    @latitude = params[:latitude].to_f if params[:latitude]
-    @longitude = params[:longitude].to_f if params[:longitude]
-    
+    latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
+    longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
+
     # sort by distance
-    @restaurants = Restaurant.all
-    @restaurants = Restaurant.sort_by_distance(@restaurants, @latitude, @longitude)
-    
+    @restaurants = Restaurant.sort_by_distance(@restaurants, latitude, longitude)
+
     respond_with(@restaurants, :api_template => :valid_lunches_only)
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
-
     respond_with(@restaurant, :api_template => :default)
   end
 
   def create
-    @restaurant = Restaurant.create!(params[:restaurant])
+    @restaurant.save!
 
     respond_with(@restaurant, :api_template => :default, :location => api_restaurant_url(@restaurant))
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.update_attributes!(params[:restaurant])
 
     respond_with(@restaurant, :api_template => :default, :location => api_restaurant_url(@restaurant))

@@ -6,7 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 
-User.create!(:email => "quentin@example.com", :password => "monkey")
+AdminUser.create!(:email => "quentin@example.com", :password => "monkey")
 
 h = Restaurant.create!(:name => 'Happiness', :latitude => 60.17176616743565, :longitude => 24.947290420532227)
 r = Restaurant.create!(:name => 'Raiku', :latitude => 60.180335531616585, :longitude => 24.951839447021484)
