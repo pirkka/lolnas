@@ -18,6 +18,9 @@ body {
   text-align: left;
 }
 
+div.maplink {
+  float: right;
+}
 
 #logo {
   width: 100%;
