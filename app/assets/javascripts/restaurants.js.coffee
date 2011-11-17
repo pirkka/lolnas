@@ -7,14 +7,15 @@ class GeoLocator
   setCoordinates: (position) ->
     @lat = position.coords.latitude
     @lon = position.coords.longitude
-    console.log 'Set location to ' + @lat + ',' + @lon
+    console.log 'Location was set to ' + @lat + ',' + @lon
   locationFailed: ->
     alert 'Failed to geololcate (o __ o)'
   locate: (callback, callback_e) ->
     if window.navigator.geolocation
-      console.log 'Locating'
+      console.log 'Locating...'
       window.navigator.geolocation.getCurrentPosition((position) =>
         this.setCoordinates(position)
+        callback()
       , this.locationFailed);
     else
       alert 'Geololcation is not supported. :/'
@@ -89,7 +90,7 @@ class LunchAddress
   constructor: (@locator) ->
     @geocoder = new google.maps.Geocoder()
   display: ->
-    console.log 'Showing address using reverse geocoding'
+    console.log 'Showing address for ' + @locator.latitude() + ',' + @locator.longitude()
     latlng = new google.maps.LatLng(@locator.latitude(), @locator.longitude());
     @geocoder.geocode({'latLng': latlng}, (results, status) =>
       if status == google.maps.GeocoderStatus.OK
@@ -111,6 +112,7 @@ class LunchAddress
 
 class LunchMapGUI
   constructor: (lat, lon) ->
+    console.log 'Initial location is ' + lat + ',' + lon
     @gl = new GeoLocator(lat, lon)
     @ls = new LunchSorter(@gl)
     #@lm = new LunchMap(@gl)
@@ -119,9 +121,9 @@ class LunchMapGUI
     @ls.sortByCloseness()
     @la.display()
   locate: ->
-    @gl.locate()
-    @ls.sortByCloseness()
-    #@lm.create() # creates map
-    @la.display()
+    @gl.locate( =>
+      @ls.sortByCloseness()
+      @la.display()
+    )
 
 window.LunchMapGUI = LunchMapGUI
