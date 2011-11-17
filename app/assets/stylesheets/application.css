@@ -29,3 +29,7 @@ div.maplink {
 #logo img {
   width: 100%;
 }
+
+th {
+  padding-right: 20px;
+}
