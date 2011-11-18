@@ -18,3 +18,6 @@ http://openlayers.org/
 
 Google Maps query parameters
 http://mapki.com/wiki/Google_Map_Parameters
+
+To get bearing (not implemented yet), we could use...
+http://www.rubygeocoder.com/
