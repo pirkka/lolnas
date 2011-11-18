@@ -149,3 +149,14 @@
   %li DESTROY http://www.lolnas.fi/api/restaurants/id/lunches/lunch_id.(json/xml)?auth_token=API_AVAIN
   %ul
     %li Poista ravintolan id lounas lunch_id
+
+%h2 JSON-P
+
+%p
+  API tukee JSON-P-kutsuja parametrillä "callback". Esimerkiksi:
+
+  %li GET http://www.lolnas.fi/api/restaurants/1/lunches/5.json?callback=funktio
+  %pre
+    = preserve "funktio(\n  {\n    \"lunch\": {\n      \"id\": 5,\n      |
+    \"price\": 9.5,\n      \"title\": \"Thai-buffet + sushi\",\n      |
+    \"valid_from\": null,\n      \"valid_until\": null\n    }\n  }\n)" |
