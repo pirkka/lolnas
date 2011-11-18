@@ -35,6 +35,7 @@ class LunchSorter
     html += '<a href="' + r.url + '">'
     html += r.name
     html += '</a>'
+    html += ' ' + Math.round(r.distance) + 'm'
     html += '</div>'
     html += '<div class="menu">'
     html += this.htmlLunch(l) for l in r.lunches

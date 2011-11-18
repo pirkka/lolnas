@@ -10,7 +10,9 @@
 
 #list
   -@restaurants.each do |r|
-    %div{:class => 'restaurant'}= r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
+    %div{:class => 'restaurant'}
+      = r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
+      = "(#{r.distance.round})"
     %div{:class => 'menu'}
       -r.valid_lunches.each do |l|
         = l.title

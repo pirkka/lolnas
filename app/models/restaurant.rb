@@ -1,3 +1,9 @@
+class Numeric
+  def to_rad
+    self * Math::PI / 180
+  end
+end
+
 class Restaurant < ActiveRecord::Base
 
   acts_as_api
@@ -42,16 +48,26 @@ class Restaurant < ActiveRecord::Base
   def self.sort_by_distance(restaurants, lat, lon)
     Rails.logger.debug("sorting for #{lat}, #{lon}")
     restaurants.each do |r|
-      r.distance = Restaurant.distance_formula(r.latitude.to_f, lat.to_f, r.longitude.to_f, lon.to_f)
+      r.distance = Restaurant.distance_formula([r.latitude.to_f, r.longitude.to_f], [lat.to_f, lon.to_f])
       Rails.logger.debug("#{r.name} at #{r.latitude}, #{r.longitude} ---> #{r.distance}")
     end
     restaurants.sort { |a,b| a.distance <=> b.distance }
   end
 
-  # upgrade when needed to true lat lon formula
-  def self.distance_formula (x1, x2, y1, y2) # define method distance formula with parameters x1, x2, y1, y2
-    d = Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2)) # distance = square root of x2-x1^2 + y2-y1^2
-    return d # return d, the distance
+  # http://www.movable-type.co.uk/scripts/latlong.html
+  # loc1 and loc2 are arrays of [latitude, longitude]
+  def self.distance_formula loc1, loc2
+     lat1, lon1 = loc1
+     lat2, lon2 = loc2
+     dLat = (lat2-lat1).to_rad
+     dLon = (lon2-lon1).to_rad
+     a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+         Math.cos(lat1.to_rad) * Math.cos(lat2.to_rad) *
+         Math.sin(dLon/2) * Math.sin(dLon/2)
+     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+     d = 6371 * c * 1000 # Multiply by 6371 to get Kilometers --> and further by 1000 to get meters I_I
+     return d
   end
+
 
 end
