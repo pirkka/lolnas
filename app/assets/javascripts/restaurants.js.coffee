@@ -110,7 +110,10 @@ class LunchAddress
   writeAddress: (txt) ->
     $('span#address').html(txt)
   formatAddress: (result) ->
-    return result.address_components[1].short_name + ' ' + result.address_components[0].short_name + ' (' + result.address_components[2].short_name + ')'
+    street = '<a href="http://maps.google.com/maps?q=' + @locator.latitude() + ',' + @locator.longitude() + '+(' + result.address_components[1].short_name + ' ' + result.address_components[0].short_name + ')&z=16">' + result.address_components[1].short_name + ' ' + result.address_components[0].short_name + '</a>'
+    #street = result.address_components[1].short_name + ' ' + result.address_components[0].short_name 
+    area = ' (' + result.address_components[2].short_name + ')'
+    return street + area
 
 class LunchMapGUI
   constructor: (lat, lon) ->
