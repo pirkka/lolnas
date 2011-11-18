@@ -40,3 +40,7 @@ div#flash_messages {
   background: #FFFF66;
   margin-bottom: 20px;
 }
+
+a {
+  text-decoration: none;
+}
