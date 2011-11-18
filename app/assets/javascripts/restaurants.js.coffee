@@ -29,12 +29,12 @@ class LunchSorter
   htmlRestaurant: (r) ->
     html = ''
     html += '<div class="maplink">'
-    html += '<a href="http://maps.google.com/maps?q=' + r.latitude + ',' + r.longitude + '+(' + r.name + ')&z=16">kartalla</a>'
+    html += '<a href="http://maps.google.com/maps?q=' + r.latitude + ',' + r.longitude + '+(' + r.name.replace(/[^a-zA-Z 0-9åäöÅÄÖ]+/g,'') + ')&z=16">kartalla</a>'
     html += '</div>'
     html += '<div class="restaurant">'
-    html += '<a href="' + r.url + '">'
+    html += '<a href="' + r.url + '">' if r.url
     html += r.name
-    html += '</a>'
+    html += '</a>' if r.url
     html += ' ' + Math.round(r.distance) + 'm'
     html += '</div>'
     html += '<div class="menu">'
@@ -44,9 +44,10 @@ class LunchSorter
   htmlLunch: (l) ->
     html = ''
     html += l.title
-    html += '&nbsp;<strong>'
-    html += l.price
-    html += '&nbsp;&euro;</strong>'
+    if l.price
+      html += '&nbsp;<strong>'
+      html += l.price.toFixed(2).toString().replace(/\./, ',')
+      html += '&nbsp;&euro;</strong>'
     html += '<br />'
     return html
   sortByCloseness: ->

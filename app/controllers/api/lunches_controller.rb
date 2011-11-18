@@ -6,27 +6,39 @@ class Api::LunchesController < ApiController
   def index
     @lunches = @lunches.by_restaurant_id(params[:restaurant_id])
 
-    respond_with(@lunches, :api_template => :default)
+    respond_with(@lunches,
+                 :api_template => :default,
+                 :callback => params[:callback])
   end
 
   def show
-    respond_with(@lunch, :api_template => :default)
+    respond_with(@lunch,
+                 :api_template => :default,
+                 :callback => params[:callback])
   end
 
   def create
     @lunch.save!
 
-    respond_with(@lunch, :api_template => :default, :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch))
+    respond_with(@lunch,
+                 :api_template => :default,
+                 :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch),
+                 :callback => params[:callback])
   end
 
   def update
     @lunch.update_attributes!(params[:lunch])
 
-    respond_with(@lunch, :api_template => :default, :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch))
+    respond_with(@lunch,
+                 :api_template => :default,
+                 :location => api_restaurant_lunch_url(params[:restaurant_id], @lunch),
+                 :callback => params[:callback])
   end
 
   def destroy
-    respond_with(@lunch.destroy, :api_template => :default)
+    respond_with(@lunch.destroy,
+                 :api_template => :default,
+                 :callback => params[:callback])
   end
 
   private
