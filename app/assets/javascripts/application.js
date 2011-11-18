@@ -7,3 +7,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require restaurants
+
+Lolnas = {
+  supportsSVG: function () {
+    return !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', "svg").createSVGRect;
+  }
+};
+
+$(function () {
+  // check for SVG support
+  if (!Lolnas.supportsSVG()) {
+    $('img#logo').attr('src', '/assets/lolnas.gif');
+  }
+});

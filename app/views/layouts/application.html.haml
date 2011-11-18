@@ -14,7 +14,7 @@
     #container
       #logo
         %a{:href => '/'}
-          =image_tag "/assets/lolnas.svg"
+          =image_tag "/assets/lolnas.svg", :id => 'logo'
 
       -if flash[:notice]
         #flash_messages
