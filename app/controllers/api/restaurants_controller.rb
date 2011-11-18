@@ -9,23 +9,33 @@ class Api::RestaurantsController < ApiController
     # sort by distance
     @restaurants = Restaurant.sort_by_distance(@restaurants, latitude, longitude)
 
-    respond_with(@restaurants, :api_template => :valid_lunches_only)
+    respond_with(@restaurants,
+                 :api_template => :valid_lunches_only,
+                 :callback => params[:callback])
   end
 
   def show
-    respond_with(@restaurant, :api_template => :default)
+    respond_with(@restaurant,
+                 :api_template => :default,
+                 :callback => params[:callback])
   end
 
   def create
     @restaurant.save!
 
-    respond_with(@restaurant, :api_template => :default, :location => api_restaurant_url(@restaurant))
+    respond_with(@restaurant,
+                 :api_template => :default,
+                 :location => api_restaurant_url(@restaurant),
+                 :callback => params[:callback])
   end
 
   def update
     @restaurant.update_attributes!(params[:restaurant])
 
-    respond_with(@restaurant, :api_template => :default, :location => api_restaurant_url(@restaurant))
+    respond_with(@restaurant,
+                 :api_template => :default,
+                 :location => api_restaurant_url(@restaurant),
+                 :callback => params[:callback])
   end
 
 end
