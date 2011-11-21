@@ -22,7 +22,7 @@ class Lunch < ActiveRecord::Base
 
   validates :title, :presence => true
 
-  attr_accessible :title, :price, :valid_from, :valid_until, :valid_date
+  attr_accessible :title, :price, :valid_from, :valid_until, :valid_date, :restaurant_id
 
   def valid_date=(valid_date)
     parsed_date = Date.parse(valid_date)
