@@ -16,6 +16,8 @@ class Restaurant < ActiveRecord::Base
     template.add :longitude
     template.add :lunches
     template.add :distance # NB
+    template.add :data_provider_title
+    template.add :data_provider_url
   end
 
   api_accessible :valid_lunches_only, :extend => :default do |template|
@@ -30,7 +32,7 @@ class Restaurant < ActiveRecord::Base
 
   belongs_to :api_user, :class_name => "Api::User"
 
-  attr_accessible :name, :url, :latitude, :longitude, :distance
+  attr_accessible :name, :url, :latitude, :longitude, :distance, :data_provider_title, :data_provider_url
 
   def valid_lunches
     lunches.valid_only
