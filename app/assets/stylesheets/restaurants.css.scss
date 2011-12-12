@@ -32,7 +32,6 @@ div.restaurant {
 }
 
 div.menu {
- margin-bottom: 20px;
 }
 
 #address {
@@ -79,4 +78,15 @@ div.menu {
 .button:active {
 	position:relative;
 	top:1px;
+}
+
+.data-provider {
+	margin-bottom: 20px; 
+	color: #999;
+	font-size: 12px;
+	font-family: Verdana, sans-serif;
+}
+
+.data-provider a {
+	
 }

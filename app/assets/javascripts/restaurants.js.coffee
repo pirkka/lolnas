@@ -40,6 +40,10 @@ class LunchSorter
     html += '<div class="menu">'
     html += this.htmlLunch(l) for l in r.lunches
     html += '</div>'
+    html += '<div class="data-provider">'
+    html += 'Tämän ravintolan lounastiedot toimitti '
+    html += '<a href="' + r.data_provider_url + '">' + r.data_provider_title + '</a>'
+    html += '</div>'
     return html
   htmlLunch: (l) ->
     html = ''
