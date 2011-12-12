@@ -17,6 +17,10 @@
 %h2 Tietomalli
 
 %h3 Restaurant
+
+%p 
+  Jokaisen ravintolan tiedoista vastaa järjestelmässä yksi käyttäjä. Mikään ei kuitenkaan estä toista käyttäjää tekemään omaa versiotaan samasta ravintolasta. 
+
 %table
   %tr
     %th
@@ -25,6 +29,8 @@
       Tyyppi
     %th
       Pakollinen?
+    %th
+      Lisätietoja
   %tr
     %td
       name
@@ -52,8 +58,29 @@
     %td
       String
     %td
+  %tr
+    %td
+      DataProviderTitle
+    %td
+      String
+    %td
+    %td
+      Tämä näkyy otsikkona kohdassa "Tämän ravintolan lounastiedot toimitti X."
+  %tr
+    %td
+      DataProviderURL
+    %td
+      String
+    %td
+    %td
+      Kohdan "Tämän ravintolan lounastiedot toimitti X." linkki johtaa tähän osoitteeseen.
 
 %h3 Lunch
+
+%p
+  Jokainen lounasvaihtoehto tallenetaan järjestelmään tämän olion instanssina.
+  Mikäli kyseessä on buffet-lounas, yhden instanssin tulisi sisältää kaikki hintaan sisältyvät ruuat.
+
 %table
   %tr
     %th
