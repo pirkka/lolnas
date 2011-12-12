@@ -42,8 +42,11 @@ class LunchSorter
     html += '</div>'
     html += '<div class="data-provider">'
     html += 'Tämän ravintolan lounastiedot toimitti '
-    html += '<a href="' + r.data_provider_url + '">' + r.data_provider_title + '</a>'
-    html += '</div>'
+    if r.data_provider_url
+      html += '<a href="' + r.data_provider_url + '">' + r.data_provider_title + '</a>'
+    else
+      html += 'anonyymi'
+    html += '.</div>'
     return html
   htmlLunch: (l) ->
     html = ''

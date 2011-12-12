@@ -19,7 +19,12 @@
         %strong= format_price(l.price)
         %br/
     %div{:class => 'data-provider'}
-      = link_to(r.data_provider_title,r.data_provider_url)
+      | Tämän ravintolan lounastiedot toimitti
+      - if r.data_provider_title && r.data_provider_url
+        = link_to(r.data_provider_title,r.data_provider_url)
+      - else
+        | anonyymi
+      |.
 :javascript
   $(function () {
     window.lmgui = new LunchMapGUI(#{@latitude},#{@longitude})
