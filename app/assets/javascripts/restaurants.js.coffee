@@ -7,7 +7,7 @@ class GeoLocator
   setCoordinates: (position) ->
     @lat = position.coords.latitude
     @lon = position.coords.longitude
-    console.log 'Location was set to ' + @lat + ',' + @lon
+    console.log "Location was set to #{@lat},#{@lon}"
   locationFailed: ->
     alert 'Failed to geololcate (o __ o)'
   locate: (callback, callback_e) ->
@@ -29,21 +29,23 @@ class LunchSorter
   htmlRestaurant: (r) ->
     html = ''
     html += '<div class="maplink">'
-    html += '<a href="http://maps.google.com/maps?q=' + r.latitude + ',' + r.longitude + '+(' + r.name.replace(/[^a-zA-Z 0-9åäöÅÄÖ]+/g,'') + ')&z=16">kartalla</a>'
+    html += "<a href='http://maps.google.com/maps?q=#{r.latitude},#{r.longitude}+(#{r.name.replace(/[^a-zA-Z 0-9åäöÅÄÖ]+/g,'')})&z=16'>kartalla</a>"
     html += '</div>'
     html += '<div class="restaurant">'
-    html += '<a href="' + r.url + '">' if r.url
+    html += "<a href='#{r.url}'>" if r.url
     html += r.name
     html += '</a>' if r.url
-    html += ' ' + Math.round(r.distance) + 'm'
+    html += " #{Math.round(r.distance)}m"
     html += '</div>'
     html += '<div class="menu">'
     html += this.htmlLunch(l) for l in r.lunches
     html += '</div>'
     html += '<div class="data-provider">'
     html += 'Tämän ravintolan lounastiedot toimitti '
-    if r.data_provider_url
-      html += '<a href="' + r.data_provider_url + '">' + r.data_provider_title + '</a>'
+    if r.data_provider_title
+      html += "<a href='#{r.data_provider_url}'>" if r.data_provider_url
+      html += r.data_provider_title
+      html += '</a>' if r.data_provider_url
     else
       html += 'anonyymi'
     html += '.</div>'
@@ -60,7 +62,7 @@ class LunchSorter
   sortByCloseness: ->
     lat = @locator.latitude()
     lon = @locator.longitude()
-    console.log 'Sorting lunches for ' + lat + ',' + lon
+    console.log "Sorting lunches for #{lat},#{lon}"
     # ajax from server
     ajax_settings =
       context: this
@@ -70,7 +72,7 @@ class LunchSorter
         # update html list
         $('#list').append(this.htmlRestaurant(d)) for d in data.restaurants
 
-      url: '/api/restaurants.json?latitude=' + lat + '&longitude=' + lon
+      url: "/api/restaurants.json?latitude=#{lat}&longitude=#{lon}"
     $.ajax(ajax_settings)
 
     return 'done'
@@ -99,32 +101,31 @@ class LunchAddress
   constructor: (@locator) ->
     @geocoder = new google.maps.Geocoder()
   display: ->
-    console.log 'Showing address for ' + @locator.latitude() + ',' + @locator.longitude()
+    console.log "Showing address for #{@locator.latitude()},#{@locator.longitude()}"
     latlng = new google.maps.LatLng(@locator.latitude(), @locator.longitude());
     @geocoder.geocode({'latLng': latlng}, (results, status) =>
       if status == google.maps.GeocoderStatus.OK
         if results[0]
-          txt = 'Lounaslista osoitteelle ' + this.formatAddress(results[0])
+          txt = "Lounaslista osoitteelle #{this.formatAddress(results[0])}"
           this.writeAddress(txt)
         else
-          txt = 'Lounaslista sijainnille ' + @locator.latitude() + ',' + @locator.longitude()
+          txt = "Lounaslista sijainnille #{@locator.latitude()},#{@locator.longitude()}"
           this.writeAddress(txt)
       else
-        console.log "Geocoder failed due to: " + status
+        console.log "Geocoder failed due to: #{status}"
         txt = 'Geokoodaus ep&auml;onnistui.'
         this.writeAddress(txt)
     )
   writeAddress: (txt) ->
     $('span#address').html(txt)
   formatAddress: (result) ->
-    street = '<a href="http://maps.google.com/maps?q=' + @locator.latitude() + ',' + @locator.longitude() + '+(' + result.address_components[1].short_name + ' ' + result.address_components[0].short_name + ')&z=16">' + result.address_components[1].short_name + ' ' + result.address_components[0].short_name + '</a>'
-    #street = result.address_components[1].short_name + ' ' + result.address_components[0].short_name 
-    area = ' (' + result.address_components[2].short_name + ')'
+    street = "<a href='http://maps.google.com/maps?q=#{@locator.latitude()},#{@locator.longitude()}+(#{result.address_components[1].short_name} #{result.address_components[0].short_name})&z=16'>#{result.address_components[1].short_name} #{result.address_components[0].short_name}</a>"
+    area = " (#{result.address_components[2].short_name})"
     return street + area
 
 class LunchMapGUI
   constructor: (lat, lon) ->
-    console.log 'Initial location is ' + lat + ',' + lon
+    console.log "Initial location is #{lat},#{lon}"
     @gl = new GeoLocator(lat, lon)
     @ls = new LunchSorter(@gl)
     #@lm = new LunchMap(@gl)
