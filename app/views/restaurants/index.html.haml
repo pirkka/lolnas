@@ -10,21 +10,22 @@
 
 #list
   -@restaurants.each do |r|
-    %div{:class => 'restaurant'}
-      = r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
-      = "(#{r.distance.round})"
-    %div{:class => 'menu'}
-      -r.valid_lunches.each do |l|
-        = l.title
-        %strong= format_price(l.price)
-        %br/
-    %div{:class => 'data-provider'}
-      | Tämän ravintolan lounastiedot toimitti
-      - if r.data_provider_title && r.data_provider_url
-        = link_to(r.data_provider_title,r.data_provider_url)
-      - else
-        | anonyymi
-      |.
+    - if r.valid_lunches != []
+      %div{:class => 'restaurant'}
+        = r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
+        = "(#{r.distance.round})"
+      %div{:class => 'menu'}
+        -r.valid_lunches.each do |l|
+          = l.title
+          %strong= format_price(l.price)
+          %br/
+      %div{:class => 'data-provider'}
+        | Tämän ravintolan lounastiedot toimitti
+        - if r.data_provider_title && r.data_provider_url
+          = link_to(r.data_provider_title,r.data_provider_url)
+        - else
+          | anonyymi
+        |.
 :javascript
   $(function () {
     window.lmgui = new LunchMapGUI(#{@latitude},#{@longitude})

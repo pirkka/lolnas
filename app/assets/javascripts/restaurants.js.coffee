@@ -27,6 +27,8 @@ class GeoLocator
 class LunchSorter
   constructor: (@locator) ->
   htmlRestaurant: (r) ->
+    if r.lunches == []
+      return ''
     html = ''
     html += '<div class="maplink">'
     html += "<a href='http://maps.google.com/maps?q=#{r.latitude},#{r.longitude}+(#{r.name.replace(/[^a-zA-Z 0-9åäöÅÄÖ]+/g,'')})&z=16'>kartalla</a>"
