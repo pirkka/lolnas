@@ -27,7 +27,7 @@ class GeoLocator
 class LunchSorter
   constructor: (@locator) ->
   htmlRestaurant: (r) ->
-    if r.lunches == []
+    if r.lunches.length == 0
       return ''
     html = ''
     html += '<div class="maplink">'
