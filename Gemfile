@@ -10,7 +10,7 @@ gem 'json'
 gem 'pg'
 
 gem 'devise'
-gem 'activeadmin', :git => "git://github.com/gregbell/active_admin.git"
+gem 'activeadmin'
 gem 'cancan'
 
 gem 'sass-rails', "  ~> 3.2.3"
