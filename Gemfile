@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.2'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -13,7 +13,7 @@ gem 'devise'
 gem 'activeadmin'
 gem 'cancan'
 
-gem 'sass-rails', "  ~> 3.1.0"
+gem 'sass-rails'
 
 gem 'acts_as_api'
 
@@ -24,14 +24,14 @@ gem 'haml'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'coffee-rails'
   gem 'uglifier'
 end
 
 group :development do
   gem 'heroku'
   gem 'sqlite3'
-  gem 'rails-dev-tweaks', '~> 0.5.1'
+#  gem 'rails-dev-tweaks', :git => "git://github.com/wavii/rails-dev-tweaks.git", :branch => "next_rails"
   gem 'hpricot'
   gem 'ruby_parser'
 end
