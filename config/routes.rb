@@ -16,5 +16,5 @@ Lolnas::Application.routes.draw do
 
   match '/lista' => 'restaurants#index'
 
-  root :to => 'welcome#index'
+  root :to => 'restaurants#index'
 end
