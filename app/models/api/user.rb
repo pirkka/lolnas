@@ -16,6 +16,10 @@ class Api::User < ActiveRecord::Base
 
   has_many :restaurants, :foreign_key => "api_user_id"
 
+  def to_s
+    email
+  end
+
   protected
 
   def password_required?

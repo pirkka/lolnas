@@ -32,7 +32,7 @@ class Restaurant < ActiveRecord::Base
 
   belongs_to :api_user, :class_name => "Api::User"
 
-  attr_accessible :name, :url, :latitude, :longitude, :distance, :data_provider_title, :data_provider_url
+  attr_accessible :name, :url, :latitude, :longitude, :distance, :data_provider_title, :data_provider_url, :api_user_id
 
   def valid_lunches
     lunches.valid_only
