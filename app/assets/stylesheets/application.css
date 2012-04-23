@@ -14,7 +14,7 @@ body {
 
 #container {
   margin: 0 auto;
-  width: 600px;
+  max-width: 600px;
   text-align: left;
 }
 
@@ -27,7 +27,7 @@ div.maplink {
 }
 
 #logo img {
-  width: 600px;
+  max-width: 600px;
   height: 225px;
 }
 
@@ -50,12 +50,12 @@ table {
   font-family: Verdana, sans-serif;
   background: #D8F6CE;
   padding: 5px;
-  
-  -webkit-border-radius: 5px; 
-     -moz-border-radius: 5px; 
-          border-radius: 5px; 
 
-  
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+
+
   -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 
 }
