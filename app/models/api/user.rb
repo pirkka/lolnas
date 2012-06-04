@@ -1,5 +1,5 @@
 class Api::User < ActiveRecord::Base
-  set_table_name "api_users"
+  self.table_name = "api_users"
 
   # Include default devise modules. Others available are:
   # :encryptable, :lockable, :recoverable, :rememberable, :timeoutable and :omniauthable
