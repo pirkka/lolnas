@@ -7,6 +7,8 @@ class GeoLocator
   setCoordinates: (position) ->
     @lat = position.coords.latitude
     @lon = position.coords.longitude
+    eval('obj = ' + "{ 'latitude':'#{@lat}', 'longitude':'#{@lon}' }", window);
+    $.JSONCookie('location', obj);
     console.log "Location was set to #{@lat},#{@lon}"
   locationFailed: ->
     alert 'Failed to geololcate (o __ o)'
