@@ -5,14 +5,13 @@ class Api::RestaurantsController < ApiController
 
   def index
     # defaults
-    latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
-    longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
-
-    Location.latitude = latitude
-    Location.longitude = longitude
+    Location.latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
+    Location.longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
 
     # sort by distance
-    @restaurants = Restaurant.sort_by_distance(@restaurants, latitude, longitude)
+    @restaurants = Restaurant.sort_by_distance(@restaurants,
+                                                Location.latitude,
+                                                Location.longitude)
 
     respond_with(@restaurants,
                  :api_template => :valid_lunches_only,

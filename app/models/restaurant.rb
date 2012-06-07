@@ -15,7 +15,7 @@ class Restaurant < ActiveRecord::Base
     template.add :latitude
     template.add :longitude
     template.add :lunches
-    template.add :distance # NB
+    template.add :distance_from_current_position, :as => :distance # NB
     template.add :data_provider_title
     template.add :data_provider_url
   end
@@ -38,7 +38,7 @@ class Restaurant < ActiveRecord::Base
     lunches.valid_only
   end
 
-  def distance
+  def distance_from_current_position
     distance_from_position(Location.latitude, Location.longitude)
   end
 
