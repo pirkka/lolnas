@@ -3,7 +3,7 @@
 /  #map_canvas
 
 #locate
-  %a{:class => 'button', :id => 'locate'} Paikanna  
+  %a{:class => 'button', :id => 'locate'} Paikanna
 
 #address
   %span#address
@@ -13,7 +13,7 @@
     - if r.valid_lunches != []
       %div{:class => 'restaurant'}
         = r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
-        = "(#{r.distance.round})"
+        = " #{r.distance_from_position(@latitude, @longitude).round}m"
       %div{:class => 'menu'}
         -r.valid_lunches.each do |l|
           = l.title

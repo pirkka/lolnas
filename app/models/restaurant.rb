@@ -38,22 +38,22 @@ class Restaurant < ActiveRecord::Base
     lunches.valid_only
   end
 
-  def distance=(value)
-    @distance = value
+  def distance
+    # FIXME: miten acts_as_api voisi passata latitude&longitude tänne?
+    distance_from_position(@latitude, @longitude)
   end
 
-  def distance
-    @distance
+  def distance_from_position(latitude, longitude)
+    @latitude = latitude
+    @longitude = longitude
+    @distance = Restaurant.distance_formula([self.latitude, self.longitude],
+                                           [latitude.to_f, longitude.to_f])
   end
 
   # as long as our db doesn't support this...
   def self.sort_by_distance(restaurants, lat, lon)
     Rails.logger.debug("sorting for #{lat}, #{lon}")
-    restaurants.each do |r|
-      r.distance = Restaurant.distance_formula([r.latitude.to_f, r.longitude.to_f], [lat.to_f, lon.to_f])
-      Rails.logger.debug("#{r.name} at #{r.latitude}, #{r.longitude} ---> #{r.distance}")
-    end
-    restaurants.sort { |a,b| a.distance <=> b.distance }
+    restaurants.sort { |a,b| a.distance_from_position(lat, lon) <=> b.distance_from_position(lat, lon) }
   end
 
   # http://www.movable-type.co.uk/scripts/latlong.html
