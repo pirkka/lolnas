@@ -1,8 +1,6 @@
 class Api::RestaurantsController < ApiController
   load_and_authorize_resource
 
-  include Location
-
   def index
     # defaults
     Location.latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
