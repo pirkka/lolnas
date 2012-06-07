@@ -48,9 +48,10 @@ class Restaurant < ActiveRecord::Base
   end
 
   # as long as our db doesn't support this...
-  def self.sort_by_distance(restaurants, lat, lon)
-    Rails.logger.debug("sorting for #{lat}, #{lon}")
-    restaurants.sort { |a,b| a.distance_from_position(lat, lon) <=> b.distance_from_position(lat, lon) }
+  def self.sort_by_distance(restaurants, latitude, longitude)
+    Rails.logger.debug("sorting for #{latitude}, #{longitude}")
+    restaurants.sort { |a,b| a.distance_from_position(latitude, longitude) <=>
+                              b.distance_from_position(latitude, longitude) }
   end
 
   # http://www.movable-type.co.uk/scripts/latlong.html
