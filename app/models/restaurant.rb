@@ -39,13 +39,10 @@ class Restaurant < ActiveRecord::Base
   end
 
   def distance
-    # FIXME: miten acts_as_api voisi passata latitude&longitude tänne?
-    distance_from_position(@latitude, @longitude)
+    distance_from_position(Location.latitude, Location.longitude)
   end
 
   def distance_from_position(latitude, longitude)
-    @latitude = latitude
-    @longitude = longitude
     @distance = Restaurant.distance_formula([self.latitude, self.longitude],
                                            [latitude.to_f, longitude.to_f])
   end

@@ -1,10 +1,15 @@
 class Api::RestaurantsController < ApiController
   load_and_authorize_resource
 
+  include Location
+
   def index
     # defaults
     latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
     longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
+
+    Location.latitude = latitude
+    Location.longitude = longitude
 
     # sort by distance
     @restaurants = Restaurant.sort_by_distance(@restaurants, latitude, longitude)
