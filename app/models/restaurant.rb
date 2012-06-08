@@ -39,19 +39,20 @@ class Restaurant < ActiveRecord::Base
   end
 
   def distance_from_current_position
-    distance_from_position(Location.latitude, Location.longitude)
+    distance_from_position(Location.coordinates)
   end
 
-  def distance_from_position(latitude, longitude)
+  def distance_from_position(coordinates)
+    latitude, longitude = coordinates
     @distance = Restaurant.distance_formula([self.latitude, self.longitude],
                                            [latitude.to_f, longitude.to_f])
   end
 
   # as long as our db doesn't support this...
-  def self.sort_by_distance(restaurants, latitude, longitude)
-    Rails.logger.debug("sorting for #{latitude}, #{longitude}")
-    restaurants.sort { |a,b| a.distance_from_position(latitude, longitude) <=>
-                              b.distance_from_position(latitude, longitude) }
+  def self.sort_by_distance(restaurants, coordinates)
+    Rails.logger.debug("sorting for #{coordinates}")
+    restaurants.sort { |a,b| a.distance_from_position(coordinates) <=>
+                              b.distance_from_position(coordinates) }
   end
 
   # http://www.movable-type.co.uk/scripts/latlong.html

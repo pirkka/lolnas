@@ -1,41 +1,29 @@
 class RestaurantsController < ApplicationController
 
   def index
-    if params[:address]
-      location = Geocoder.search("#{params[:address]}")
-      if location.count > 0
-        Location.latitude, Location.longitude = location.first.coordinates
-      else
-        Location.latitude, Location.longitude = user_location_from_parameters
-      end
-    else
-      Location.latitude, Location.longitude = user_location_from_parameters
-    end
+    Location.coordinates = user_location
+
+    cookies[:location] = { "latitude" => Location.latitude,
+                           "longitude" => Location.longitude }.to_json
 
     # sort by distance
     @restaurants = Restaurant.sort_by_distance(Restaurant.all,
-                                                Location.latitude,
-                                                Location.longitude)
+                                               Location.coordinates)
   end
 
   private
 
-  def user_location_from_parameters
-    # defaults
-    latitude = 60.172389
-    longitude = 24.947516
-
-    if !params[:latitude].nil? and !params[:longitude].nil?
-      latitude = params[:latitude].to_f
-      longitude = params[:longitude].to_f
-      cookies[:location] = { "latitude" => latitude, "longitude" => longitude }.to_json
-    elsif !cookies[:location].nil?
-      last_known_location = JSON.parse(cookies[:location])
-      latitude = last_known_location["latitude"]
-      longitude = last_known_location["longitude"]
+  def user_location
+    if params[:address]
+      location = Geocoder.search("#{params[:address]}")
+      return location.first.coordinates if location.count > 0
     end
 
-    return latitude, longitude
+    if !params[:latitude].nil? and !params[:longitude].nil?
+      return params[:latitude].to_f, params[:longitude].to_f
+    end
+
+    return Location.last_known_or_default_location cookies[:location]
   end
 
 end
