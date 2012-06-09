@@ -3,8 +3,9 @@ class RestaurantsController < ApplicationController
   def index
     Location.coordinates = user_location
 
-    cookies[:location] = { "latitude" => Location.latitude,
-                           "longitude" => Location.longitude }.to_json
+    cookies.permanent[:location] = {:value => {
+                              "latitude" => Location.latitude,
+                              "longitude" => Location.longitude }.to_json}
 
     # sort by distance
     @restaurants = Restaurant.sort_by_distance(Restaurant.all,
