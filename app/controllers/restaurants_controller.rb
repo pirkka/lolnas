@@ -23,7 +23,11 @@ class RestaurantsController < ApplicationController
       return params[:latitude].to_f, params[:longitude].to_f
     end
 
-    return Location.last_known_or_default_location cookies[:location]
+    if cookies[:location]
+      return Location.parse_location_from_json cookies[:location]
+    end
+
+    return Location.default_location
   end
 
 end
