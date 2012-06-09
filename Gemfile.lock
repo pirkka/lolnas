@@ -85,6 +85,7 @@ GEM
     ffi (1.0.11)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    geocoder (1.1.2)
     haml (3.1.6)
     has_scope (0.5.1)
     heroku (2.26.5)
@@ -219,6 +220,7 @@ DEPENDENCIES
   coffee-rails
   devise
   factory_girl_rails
+  geocoder
   haml
   heroku
   hpricot
