@@ -1,11 +1,34 @@
 class RestaurantsController < ApplicationController
 
   def index
-    # defaults
-    @latitude = params[:latitude].nil? ? 60.172389 : params[:latitude].to_f
-    @longitude = params[:longitude].nil? ? 24.947516 : params[:longitude].to_f
+    Location.coordinates = user_location
+
+    cookies.permanent[:location] = {:value => {
+                              "latitude" => Location.latitude,
+                              "longitude" => Location.longitude }.to_json}
 
     # sort by distance
-    @restaurants = Restaurant.sort_by_distance(Restaurant.all, @latitude, @longitude)
+    @restaurants = Restaurant.sort_by_distance(Restaurant.all,
+                                               Location.coordinates)
   end
+
+  private
+
+  def user_location
+    if params[:address]
+      location = Geocoder.search("#{params[:address]}")
+      return location.first.coordinates if location.count > 0
+    end
+
+    if !params[:latitude].nil? and !params[:longitude].nil?
+      return params[:latitude].to_f, params[:longitude].to_f
+    end
+
+    if cookies[:location]
+      return Location.parse_location_from_json cookies[:location]
+    end
+
+    return Location.default_location
+  end
+
 end

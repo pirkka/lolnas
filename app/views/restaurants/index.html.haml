@@ -3,7 +3,7 @@
 /  #map_canvas
 
 #locate
-  %a{:class => 'button', :id => 'locate'} Paikanna  
+  %a{:class => 'button', :id => 'locate'} Paikanna
 
 #address
   %span#address
@@ -13,7 +13,7 @@
     - if r.valid_lunches != []
       %div{:class => 'restaurant'}
         = r.url.blank? ? r.name : link_to(r.name, r.url, :target => "_blank")
-        = "(#{r.distance.round})"
+        = " #{r.distance_from_current_position.round}m"
       %div{:class => 'menu'}
         -r.valid_lunches.each do |l|
           = l.title
@@ -28,7 +28,7 @@
         |.
 :javascript
   $(function () {
-    window.lmgui = new LunchMapGUI(#{@latitude},#{@longitude})
+    window.lmgui = new LunchMapGUI(#{Location.latitude},#{Location.longitude})
     $('a#locate').click(function () {
       window.lmgui.locate();
     })
