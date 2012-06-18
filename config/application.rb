@@ -53,6 +53,8 @@ module Lolnas
     config.assets.initialize_on_precompile = false
 
     # Heroku lol:
-    config.assets.precompile += ['jquery_cookie.js', 'jquery_jsoncookie.js']
+    config.assets.precompile += ['jquery_cookie.js',
+                                 'jquery_jsoncookie.js',
+                                 'jquery.headerlinks.min.js']
   end
 end
