@@ -19,7 +19,7 @@ class Api::RestaurantsController < ApiController
 
   def show
     respond_with(@restaurant,
-                 :api_template => :default,
+                 :api_template => :valid_lunches_only,
                  :callback => params[:callback])
   end
 
