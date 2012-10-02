@@ -3,9 +3,8 @@ Lolnas::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :api_users, :class_name => 'Api::User', :controllers => {:confirmations => "confirmations"}
-  devise_scope :api_users do
-    put "confirm_account", :to => "confirmations#confirm_account"
+  devise_for :api_users, :class_name => 'Api::User', :controllers => {:confirmations => "confirmations"} do
+    match "/confirm_account", :to => "confirmations#confirm_account"
   end
 
   namespace :api do
